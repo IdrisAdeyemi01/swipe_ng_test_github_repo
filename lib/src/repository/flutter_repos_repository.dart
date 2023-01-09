@@ -13,15 +13,14 @@ class FlutterReposRepository {
     required int page,
     required int numberOfReposPerPage,
   }) async {
-    print('Passed here 1');
     try {
       String query =
           'q=flutter+language:dart&page=$page&per_page=$numberOfReposPerPage';
       final uri = APIData.fetchFlutterRepos(query: query);
-      final repos = await networkService.get(uri) as Map<String, dynamic>;
-      print('Passed here 2');
+    
+      final repos = await networkService.get(uri);
       final totalCount = repos["total_count"];
-      final List<Map<String, dynamic>>? allGottenRepos = repos["items"];
+      final allGottenRepos = repos["items"];
 
       List<FlutterRepo> flutterRepos = [];
       if (allGottenRepos == null) {

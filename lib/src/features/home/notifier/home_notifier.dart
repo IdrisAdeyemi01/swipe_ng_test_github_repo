@@ -22,16 +22,14 @@ class HomeNotifier extends StateNotifier<HomeState> {
             page: page,
             numberOfReposPerPage: numberOfReposPerPage,
           );
-      print('Passed here 1');
+
       state = state.copyWith(
           viewState: ViewState.idle,
           totalCountOfRetrievedRepos: repos['totalCount'],
           flutterRepos: repos["listOfFlutterRepos"],
           numberOfFlutterRepos: numberOfReposPerPage,
-          pageNumber: page++);
+          pageNumber: 2);
     } on Failure {
-      _ref.read(snackbarService).showErrorSnackBar(
-          'An error occured while fetching repos from Github');
       state = state.copyWith(
         viewState: ViewState.error,
       );
